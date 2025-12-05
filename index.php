@@ -1,30 +1,31 @@
 <?php
-
+// Récupérer la partie "path" de l'URL
 $page = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
 
+// Nettoyer le slash de fin éventuel
+$page = rtrim($page, '/');
+
+// Router selon la page
 switch($page) {
-    case "/":
+    case '':
+    case '/':
+    case '/home':
         include "controle/home.php";
         break;
 
-    case "/home":
-        include "controle/home.php";
-        break;
-
-    case "/services":
+    case '/services':
         include "controle/services.php";
         break;
 
-    case "/contact":
+    case '/contact':
         include "controle/contact.php";
         break;
 
-    case "/about":
+    case '/about':
         include "controle/about.php";
         break;
 
     default:
-        include "views/404.php";
+        include "controle/404.php";
         break;
 }
-?>
